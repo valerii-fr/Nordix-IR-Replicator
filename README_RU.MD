@@ -72,3 +72,6 @@ IntArray
 
 Проект находится в активной разработке.
 API и внутренняя структура могут изменяться.
+
+## Ссылки
+[ESP32-C3 firmware](https://github.com/valerii-fr/ESP32-C3_IR_BLE_receiver)

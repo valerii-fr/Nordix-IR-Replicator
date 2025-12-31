@@ -70,3 +70,6 @@ IR command repeatability depends on ESP32 timing accuracy and the chosen roundin
 
 The project is under active development.
 The API and internal structure are subject to change.
+
+## Links
+[ESP32-C3 firmware](https://github.com/valerii-fr/ESP32-C3_IR_BLE_receiver)
