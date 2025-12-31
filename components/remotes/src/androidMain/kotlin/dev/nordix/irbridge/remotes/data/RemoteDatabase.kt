@@ -11,7 +11,7 @@ import dev.nordix.irbridge.remotes.data.entity.RemoteEntity
         RemoteEntity::class,
         RemoteCommandEntity::class,
     ],
-    version = 2,
+    version = REMOTES_DB_SCHEMA_VERSION,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
@@ -20,3 +20,5 @@ import dev.nordix.irbridge.remotes.data.entity.RemoteEntity
 internal abstract class RemoteDatabase : RoomDatabase() {
     abstract val remoteDao: RemoteDao
 }
+
+const val REMOTES_DB_SCHEMA_VERSION = 2

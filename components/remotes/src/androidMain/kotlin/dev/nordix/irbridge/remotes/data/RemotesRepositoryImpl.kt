@@ -1,5 +1,6 @@
 package dev.nordix.irbridge.remotes.data
 
+import androidx.room.withTransaction
 import dev.nordix.irbridge.core.utils.ID
 import dev.nordix.irbridge.remotes.data.entity.RemoteDBView
 import dev.nordix.irbridge.remotes.domain.RemotesRepository
@@ -10,7 +11,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 internal class RemotesRepositoryImpl(
-    val dao: RemoteDao,
+    private val db: RemoteDatabase,
+    private val dao: RemoteDao,
 ) : RemotesRepository {
     override suspend fun getAll(): List<Remote> {
         return dao.getAll().map(RemoteDBView::toDomain)
@@ -29,6 +31,16 @@ internal class RemotesRepositoryImpl(
             dao.save(r.toEntity())
             dao.deleteCommandsByRemoteId(r.id.value)
             dao.save(*r.commands.map { c -> c.toEntity(r.id) }.toTypedArray())
+        }
+    }
+
+    override suspend fun saveAll(vararg remote: Remote) {
+        db.withTransaction {
+            remote.forEach { r ->
+                dao.save(r.toEntity())
+                dao.deleteCommandsByRemoteId(r.id.value)
+                dao.save(*r.commands.map { c -> c.toEntity(r.id) }.toTypedArray())
+            }
         }
     }
 

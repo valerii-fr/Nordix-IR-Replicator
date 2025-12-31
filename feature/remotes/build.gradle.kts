@@ -8,6 +8,7 @@ kotlin {
             implementation(project(":components:remotes"))
             implementation(project(":components:ir"))
             implementation(project(":components:ble"))
+            implementation(project(":components:export"))
         }
     }
 }

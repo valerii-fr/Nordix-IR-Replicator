@@ -2,23 +2,32 @@ package dev.nordix.irbridge.remotes.screens.list.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.generated.destinations.RemoteAddScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.nordix.irbridge.common_ui.misc.AddFab
+import dev.nordix.irbridge.export.domain.rememberBackupCallbacks
 import dev.nordix.irbridge.remotes.R
 import dev.nordix.irbridge.remotes.nav.RemotesGraph
 import dev.nordix.irbridge.remotes.screens.add.ui.RemoteAddArgs
 import dev.nordix.irbridge.remotes.screens.list.model.RemotesListScreenViewModel
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Destination<RemotesGraph>(start = true)
@@ -26,9 +35,25 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun RemotesListScreen(
     navigator: DestinationsNavigator,
+    snackbarHost: SnackbarHostState,
 ) {
     val viewModel = koinViewModel<RemotesListScreenViewModel>()
     val state by viewModel.state.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
+
+    val backupCallbacks = rememberBackupCallbacks(
+        onError = {
+            coroutineScope.launch {
+                snackbarHost.showSnackbar(it.message ?: "Unknown error")
+            }
+        },
+        onDone = {
+            coroutineScope.launch {
+                snackbarHost.showSnackbar(it)
+            }
+        }
+    )
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -38,8 +63,27 @@ fun RemotesListScreen(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.remotes)) },
+                actions = {
+                    IconButton(
+                        onClick = backupCallbacks.onExportClick
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Upload,
+                            contentDescription = stringResource(R.string.export)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = backupCallbacks.onImportClick
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Download,
+                            contentDescription = stringResource(R.string.import_db)
+                        )
+                    }
+                }
             )
-        }
+        },
     ) { pv ->
         RemotesListLayout(
             modifier = Modifier.padding(pv),

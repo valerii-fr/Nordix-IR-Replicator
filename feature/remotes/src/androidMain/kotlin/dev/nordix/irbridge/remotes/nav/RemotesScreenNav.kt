@@ -3,7 +3,10 @@ package dev.nordix.irbridge.remotes.nav
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -19,9 +22,13 @@ fun RemotesScreenNav(
     modifier: Modifier = Modifier,
 ) {
     val navController = rememberNavController()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
+        snackbarHost = {
+            SnackbarHost(snackbarHostState)
+        }
     ) { pv ->
         DestinationsNavHost(
             navController = navController,
@@ -33,14 +40,16 @@ fun RemotesScreenNav(
             ) {
                 RemoteAddScreen(
                     args = navArgs,
-                    navigator = destinationsNavigator
+                    navigator = destinationsNavigator,
+                    snackbarHost = snackbarHostState,
                 )
             }
             composable(
                 destination = RemotesListScreenDestination
             ) {
                 RemotesListScreen(
-                    navigator = destinationsNavigator
+                    navigator = destinationsNavigator,
+                    snackbarHost = snackbarHostState,
                 )
             }
         }

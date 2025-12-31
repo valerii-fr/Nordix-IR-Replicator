@@ -36,6 +36,7 @@ include(":common-ui")
 include(":components:ble")
 include(":components:ir")
 include(":components:remotes")
+include(":components:export")
 
 include(":feature:remotes")
 include(":feature:widget")

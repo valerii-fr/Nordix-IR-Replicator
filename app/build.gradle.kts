@@ -56,7 +56,8 @@ kotlin {
             implementation(project(":components:ble"))
             implementation(project(":components:ir"))
             implementation(project(":components:remotes"))
-            
+            implementation(project(":components:export"))
+
             implementation(project(":feature:remotes"))
             implementation(project(":feature:widget"))
         }

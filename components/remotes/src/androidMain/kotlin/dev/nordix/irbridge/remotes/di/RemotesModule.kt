@@ -22,6 +22,9 @@ val remotesModule = module {
     }
 
     single<RemotesRepository> {
-        RemotesRepositoryImpl(dao = get())
+        RemotesRepositoryImpl(
+            dao = get(),
+            db = get()
+        )
     }
 }

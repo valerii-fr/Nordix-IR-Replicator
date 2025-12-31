@@ -9,6 +9,7 @@ interface RemotesRepository {
     suspend fun getAllForWidget() : List<Remote>
     suspend fun getById(id: ID<Remote>) : Remote?
     suspend fun save(vararg remote: Remote)
+    suspend fun saveAll(vararg remote: Remote)
 
     fun observeAll() : Flow<List<Remote>>
     fun observeAllForWidget() : Flow<List<Remote>>
