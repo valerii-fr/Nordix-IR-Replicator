@@ -32,4 +32,5 @@
     <string name="remotes">Пульты</string>
     <string name="saved_commands">Захаваныя каманды</string>
     <string name="delete_command">Выдаліць каманду</string>
+    <string name="show_in_widget">Паказаць у віджэце</string>
 </resources>

@@ -32,4 +32,5 @@
     <string name="remotes">Fernbedienungen</string>
     <string name="saved_commands">Gespeicherte Befehle</string>
     <string name="delete_command">Befehl löschen</string>
+    <string name="show_in_widget">Im Widget anzeigen</string>
 </resources>
