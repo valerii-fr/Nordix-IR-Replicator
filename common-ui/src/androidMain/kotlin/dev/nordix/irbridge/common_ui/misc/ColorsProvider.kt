@@ -10,6 +10,7 @@ object ColorsProvider {
         Color(0xFFC7C513),
         Color(0xFF7AB822),
         Color(0xFF27BBA5),
+        Color(0xFF03A9F4),      // Primary
         Color(0xFF487AFA),
         Color(0xFFAD2BCB),
     )
