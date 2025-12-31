@@ -6,6 +6,7 @@ sealed interface RemoteAddEvent {
     data class UpdateRemote(
         val name: String,
         val description: String,
+        val showInWidget: Boolean,
     ) : RemoteAddEvent
 
     data class UpdateRemoteCommands(

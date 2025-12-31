@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Remote(
     override val id: ID<Remote>,
+    val order: Int,
+    val showInWidget: Boolean,
     val name: String,
     val description: String?,
     val commands: List<RemoteCommand>,

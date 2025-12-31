@@ -14,11 +14,17 @@ internal interface RemoteDao {
     @Query("SELECT * FROM remotes")
     suspend fun getAll(): List<RemoteDBView>
 
+    @Query("SELECT * FROM remotes WHERE showInWidget = 1")
+    suspend fun getAllForWidget(): List<RemoteDBView>
+
     @Query("SELECT * FROM remotes WHERE id = :id")
     suspend fun getById(id: String): RemoteDBView?
 
     @Query("SELECT * FROM remotes")
     fun observeAll(): Flow<List<RemoteDBView>>
+
+    @Query("SELECT * FROM remotes WHERE showInWidget = 1")
+    fun observeAllForWidget(): Flow<List<RemoteDBView>>
 
     @Query("SELECT * FROM remotes WHERE id = :id")
     fun observeById(id: String): Flow<RemoteDBView?>

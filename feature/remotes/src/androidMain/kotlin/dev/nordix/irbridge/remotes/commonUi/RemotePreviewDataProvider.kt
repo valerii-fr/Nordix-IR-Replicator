@@ -38,7 +38,9 @@ internal object RemotePreviewDataProvider {
             id = ID.Companion.new(),
             name = "Remote $idx",
             description = "Description $idx",
-            commands = mockCommands
+            commands = mockCommands,
+            order = idx,
+            showInWidget = true
         )
     }
 }

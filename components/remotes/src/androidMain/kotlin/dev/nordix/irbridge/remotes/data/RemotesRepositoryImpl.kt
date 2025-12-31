@@ -16,6 +16,10 @@ internal class RemotesRepositoryImpl(
         return dao.getAll().map(RemoteDBView::toDomain)
     }
 
+    override suspend fun getAllForWidget(): List<Remote> {
+        return dao.getAllForWidget().map(RemoteDBView::toDomain)
+    }
+
     override suspend fun getById(id: ID<Remote>): Remote? {
         return dao.getById(id.value)?.toDomain()
     }
@@ -30,6 +34,10 @@ internal class RemotesRepositoryImpl(
 
     override fun observeAll(): Flow<List<Remote>> {
         return dao.observeAll().map { it.map(RemoteDBView::toDomain) }
+    }
+
+    override fun observeAllForWidget(): Flow<List<Remote>> {
+        return dao.observeAllForWidget().map { it.map(RemoteDBView::toDomain) }
     }
 
     override fun observeById(id: ID<Remote>) : Flow<Remote?> {

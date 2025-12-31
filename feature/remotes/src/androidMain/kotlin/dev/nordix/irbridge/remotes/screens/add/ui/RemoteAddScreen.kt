@@ -29,6 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dev.nordix.irbridge.ble.model.BlePacketUi
+import dev.nordix.irbridge.common_ui.card.common.RDCardItem
+import dev.nordix.irbridge.common_ui.list.RDSwitchListItem
 import dev.nordix.irbridge.common_ui.text.RDSubtitle
 import dev.nordix.irbridge.common_ui.text.RDTextField
 import dev.nordix.irbridge.common_ui.text.RDTitle
@@ -140,6 +142,7 @@ private fun RemoteAddLayout(
                                 RemoteAddEvent.UpdateRemote(
                                     name = it,
                                     description = state.remote.description ?: "",
+                                    showInWidget = state.remote.showInWidget,
                                 )
                             )
                         },
@@ -155,10 +158,27 @@ private fun RemoteAddLayout(
                                 RemoteAddEvent.UpdateRemote(
                                     name = state.remote.name,
                                     description = it,
+                                    showInWidget = state.remote.showInWidget,
                                 )
                             )
                         },
                         showClearButton = true,
+                    )
+
+                    RDSwitchListItem(
+                        item = RDCardItem.RDClickableContent.Switch(
+                            text = stringResource(R.string.show_in_widget),
+                            onCheckedChange = {
+                                onEvent(
+                                    RemoteAddEvent.UpdateRemote(
+                                        name = state.remote.name,
+                                        description = state.remote.description ?: "",
+                                        showInWidget = it,
+                                    )
+                                )
+                            },
+                            checked = state.remote.showInWidget
+                        )
                     )
                 }
             }

@@ -16,6 +16,8 @@ data class RemoteAddState(
                 name = "",
                 description = null,
                 commands = emptyList(),
+                order = 0,
+                showInWidget = true
             ),
             receivedPattern = IntArray(0),
             bleReady = false,

@@ -1,5 +1,6 @@
 package dev.nordix.irbridge.remotes.data.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -18,4 +19,8 @@ data class RemoteEntity(
     val id: String,
     val name: String,
     val description: String?,
+    @ColumnInfo(defaultValue = "0")
+    val order: Int,
+    @ColumnInfo(defaultValue = "1")
+    val showInWidget: Boolean,
 )

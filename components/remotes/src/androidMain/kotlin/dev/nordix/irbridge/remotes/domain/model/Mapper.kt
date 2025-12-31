@@ -10,12 +10,16 @@ internal fun Remote.toEntity() : RemoteEntity = RemoteEntity(
     id = id.value,
     name = name,
     description = description,
+    order = order,
+    showInWidget = showInWidget
 )
 
 internal fun RemoteDBView.toDomain() : Remote = Remote(
     id = ID(remote.id),
     name = remote.name,
     description = remote.description,
+    order = remote.order,
+    showInWidget = remote.showInWidget,
     commands = commands.map { it.toDomain() },
 )
 
@@ -36,11 +40,4 @@ internal fun RemoteCommandEntity.toDomain() : RemoteCommand = RemoteCommand(
     icon = icon,
     color = color,
     durations = IntArrayBase64Codec.decode(durations)
-)
-
-internal fun RemoteEntity.toDomain(commands: List<RemoteCommand>) : Remote = Remote(
-    id = ID(id),
-    name = name,
-    description = description,
-    commands = commands,
 )

@@ -17,7 +17,7 @@ class RemoteWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val remotesRepository by inject<RemotesRepository>(RemotesRepository::class.java)
         val remotesFlow = remotesRepository
-            .observeAll()
+            .observeAllForWidget()
             .distinctUntilChanged()
 
         provideContent {

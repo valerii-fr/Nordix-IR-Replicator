@@ -34,6 +34,7 @@ import dev.nordix.irbridge.common_ui.theme.spacers
 import dev.nordix.irbridge.core.utils.ID
 import dev.nordix.irbridge.remotes.R
 import dev.nordix.irbridge.remotes.commonUi.RemoteItem
+import dev.nordix.irbridge.remotes.commonUi.RemotePreviewDataProvider.mockRemotes
 import dev.nordix.irbridge.remotes.domain.model.Remote
 import dev.nordix.irbridge.remotes.domain.model.RemoteCommand
 import dev.nordix.irbridge.remotes.screens.list.model.RemotesListEvent
@@ -147,26 +148,8 @@ private fun ConfirmDeleteDialog(
     showBackground = true
 )
 private fun RemotesListLayoutPreview() {
-    val commands = List(3) { index ->
-        RemoteCommand(
-            id = ID(index.toString()),
-            name = "Command ${index.unaryPlus()}",
-            description = "Description ${index.unaryPlus()}".takeIf { index % 2 == 1 },
-            durations = IntArray(1),
-            icon = null,
-            color = ColorsProvider.commandColors[index % ColorsProvider.commandColors.size].toArgb(),
-        )
-    }
     val state = RemotesListState(
-        remotes = listOf(
-            Remote(
-                id = ID("1"),
-                name = "Remote 1",
-                description = "Description 1",
-                commands = commands
-            ),
-
-        )
+        remotes = mockRemotes
     )
     IRTheme {
         RemotesListLayout(

@@ -73,6 +73,7 @@ class RemoteAddViewModel(
                     remote = _state.value.remote.copy(
                         name = event.name,
                         description = event.description,
+                        showInWidget = event.showInWidget,
                     )
                 )
             }

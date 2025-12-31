@@ -6,10 +6,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemotesRepository {
     suspend fun getAll() : List<Remote>
+    suspend fun getAllForWidget() : List<Remote>
     suspend fun getById(id: ID<Remote>) : Remote?
     suspend fun save(vararg remote: Remote)
 
     fun observeAll() : Flow<List<Remote>>
+    fun observeAllForWidget() : Flow<List<Remote>>
     fun observeById(id: ID<Remote>) : Flow<Remote?>
 
     suspend fun delete(remoteId: ID<Remote>)
