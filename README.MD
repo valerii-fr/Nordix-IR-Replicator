@@ -3,6 +3,15 @@
 Android application for interacting with the IR Bridge (ESP32).  
 The app connects to the device via BLE, receives captured IR frames, allows previewing and validating them, and saves them as remotes and commands.
 
+## TL;DR how-to:
+- Flash the ESP device with the firmware from the ESP repository.
+- Download and install the Android APK (available in the GitHub releases).
+- Enable BLE on Android and grant all required permissions (no internet required).
+- Press the “+” button in the app.
+- Wait until the BLE connection is established.
+- Capture IR commands and save the new remote.
+- Swipe on a command or remote card to edit or remove it.
+
 ## Purpose
 
 - Connect to the IR Bridge over Bluetooth Low Energy
